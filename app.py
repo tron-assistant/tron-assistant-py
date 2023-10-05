@@ -42,7 +42,8 @@ def chat():
     query = request.json["query"]
     chat_history = request.json.get("chat_history", [])
     # chat_history = [tuple(x) for x in chat_history]
-
+    print(vectorstore)
+    print(vectorstore.search(query, search_type="similarity"))
     result = qa({"question": query, "chat_history": []})
     answer = result["answer"]
     source_documents = list(set([result["source_documents"][i].metadata["source"] for i in range(len(result["source_documents"]))]))
